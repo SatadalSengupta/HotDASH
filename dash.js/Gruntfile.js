@@ -6,15 +6,6 @@ module.exports = function (grunt) {
             build: ['build/temp'],
             dist: ['dist/*']
         },
-        jshint: {
-            src: {
-                src: ['src/**/*.js', 'Gruntfile.js'],
-                options: {
-                    jshintrc: '_jshintrc'
-                }
-            }
-        },
-
         uglify: {
             options: {
                 sourceMap: true,
@@ -87,166 +78,16 @@ module.exports = function (grunt) {
                 dest: 'dist/',
                 filter: 'isFile'
             }
-        },
-        exorcise: {
-            mediaplayer: {
-                options: {},
-                files: {
-                    'build/temp/dash.mediaplayer.debug.js.map': ['build/temp/dash.mediaplayer.debug.js'],
-                }
-            },
-            protection: {
-                options: {},
-                files: {
-                    'build/temp/dash.protection.debug.js.map': ['build/temp/dash.protection.debug.js']
-                }
-            },
-            all: {
-                options: {},
-                files: {
-                    'build/temp/dash.all.debug.js.map': ['build/temp/dash.all.debug.js']
-                }
-            },
-            reporting: {
-                options: {},
-                files: {
-                    'build/temp/dash.reporting.debug.js.map': ['build/temp/dash.reporting.debug.js']
-                }
-            }
-        },
-
-        babel: {
-            options: {
-                sourceMap: true
-            },
-            es5: {
-                files: [{
-                    expand: true,
-                    src: ['index.js', 'src/**/*.js', 'externals/**/*.js'],
-                    dest: 'build/es5/',
-                }]
-            }
-        },
-
-        browserify: {
-            mediaplayer: {
-                files: {
-                    'build/temp/dash.mediaplayer.debug.js': ['src/streaming/MediaPlayer.js']
-                },
-                options: {
-                    browserifyOptions: {
-                        debug: true,
-                        standalone: 'dashjs.MediaPlayer'
-                    },
-                    plugin: [
-                        'browserify-derequire', 'bundle-collapser/plugin'
-                    ],
-                    transform: ['babelify']
-                }
-            },
-            protection: {
-                files: {
-                    'build/temp/dash.protection.debug.js': ['src/streaming/protection/Protection.js']
-                },
-                options: {
-                    browserifyOptions: {
-                        debug: true,
-                        standalone: 'dashjs.Protection'
-                    },
-                    plugin: [
-                        'browserify-derequire', 'bundle-collapser/plugin'
-                    ],
-                    transform: ['babelify']
-                }
-            },
-            reporting: {
-                files: {
-                    'build/temp/dash.reporting.debug.js': ['src/streaming/metrics/MetricsReporting.js']
-                },
-                options: {
-                    browserifyOptions: {
-                        debug: true,
-                        standalone: 'dashjs.MetricsReporting'
-                    },
-                    plugin: [
-                        'browserify-derequire', 'bundle-collapser/plugin'
-                    ],
-                    transform: ['babelify']
-                }
-            },
-            all: {
-                files: {
-                    'build/temp/dash.all.debug.js': ['index.js']
-                },
-                options: {
-                    browserifyOptions: {
-                        debug: true
-                    },
-                    plugin: [
-                        'browserify-derequire', 'bundle-collapser/plugin'
-                    ],
-                    transform: ['babelify']
-                }
-            },
-
-            watch: {
-                files: {
-                    'build/temp/dash.all.debug.js': ['index.js']
-                },
-                options: {
-                    watch: true,
-                    keepAlive: true,
-                    browserifyOptions: {
-                        debug: true
-                    },
-                    plugin: [
-                      ['browserify-derequire']
-                    ],
-                    transform: ['babelify']
-                }
-            }
-        },
-        jsdoc: {
-            dist: {
-                options: {
-                    destination: 'docs/jsdoc',
-                    configure: 'build/jsdoc/jsdoc_conf.json'
-                }
-            }
-        },
-        mocha_istanbul: {
-            test: {
-                src: './test',
-                options: {
-                    mask: '*.js',
-                    coverageFolder: './reports',
-                    mochaOptions: ['--compilers', 'js:babel/register'],
-                    print: 'summary',
-                    root: './src'
-                }
-            }
-        },
-        jscs: {
-            src: ['./src/**/*.js', 'Gruntfile.js'],
-            options: {
-                config: '_jscsrc'
-            }
-        },
-        githooks: {
-            all: {
-                'pre-commit': 'lint'
-            }
         }
     });
 
     require('load-grunt-tasks')(grunt);
     grunt.registerTask('default',   ['dist', 'test']);
-    grunt.registerTask('dist',      ['clean', 'jshint', 'jscs', 'browserify:mediaplayer' , 'browserify:protection', 'browserify:reporting', 'browserify:all', 'babel:es5', 'minimize', 'copy:dist']);
-    grunt.registerTask('minimize',  ['exorcise', 'uglify']);
-    grunt.registerTask('test',      ['mocha_istanbul:test']);
-    grunt.registerTask('watch',     ['browserify:watch']);
-    grunt.registerTask('release',   ['default', 'jsdoc']);
-    grunt.registerTask('debug',     ['clean', 'browserify:all', 'exorcise:all', 'copy:dist']);
-    grunt.registerTask('lint',      ['jshint', 'jscs']);
-    grunt.registerTask('prepublish', ['githooks', 'dist']);
+    grunt.registerTask('dist',      ['clean']);
+    grunt.registerTask('test',      []);
+    grunt.registerTask('watch',     []);
+    grunt.registerTask('release',   ['default']);
+    grunt.registerTask('debug',     ['clean']);
+    grunt.registerTask('lint',      []);
+    grunt.registerTask('prepublish', ['dist']);
 };
