@@ -10,7 +10,7 @@ module.exports = function (grunt) {
             src: {
                 src: ['src/**/*.js', 'Gruntfile.js'],
                 options: {
-                    jshintrc: '.jshintrc'
+                    jshintrc: '_jshintrc'
                 }
             }
         },
@@ -229,7 +229,7 @@ module.exports = function (grunt) {
         jscs: {
             src: ['./src/**/*.js', 'Gruntfile.js'],
             options: {
-                config: '.jscsrc'
+                config: '_jscsrc'
             }
         },
         githooks: {

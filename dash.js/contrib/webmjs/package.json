@@ -2,13 +2,18 @@
   "name": "dashjs",
   "version": "1.1.1",
   "devDependencies": {
-    "grunt": "~0.4.2",
-    "grunt-contrib-connect": "~0.7.1",
-    "grunt-contrib-watch": "~0.5.3",
-    "grunt-contrib-jasmine": "~0.5.1",
-    "grunt-contrib-jshint": "~0.8.0",
+    "grunt": "^1.6.1",
+    "grunt-contrib-connect": "^3.0.0",
+    "grunt-contrib-watch": "^1.1.0",
+    "grunt-contrib-jasmine": "^4.0.0",
+    "grunt-contrib-jshint": "^3.2.0",
     "grunt-template-jasmine-istanbul": "0.2.6",
-    "grunt-contrib-uglify": "~0.2.4",
+    "grunt-contrib-uglify": "^5.2.2",
     "jasmine-sinon": "~0.3.1"
+  },
+  "overrides": {
+    "grunt": {
+      "minimatch": "^3.1.2"
+    }
   }
 }
