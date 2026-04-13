@@ -1,0 +1,20 @@
+# Node
+node_modules/
+npm-debug.log
+
+# Python
+*.pyc
+*.pyo
+__pycache__/
+*.egg-info/
+.eggs/
+dist/
+build/
+
+# Mac
+.DS_Store
+
+# Editor
+*.swp
+*~
+.idea/

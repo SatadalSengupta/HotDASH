@@ -29,7 +29,8 @@
   "overrides": {
     "grunt": {
       "minimatch": "^3.1.2"
-    }
+    },
+    "lodash": "^4.18.1"
   },
   "repository": {
     "type": "git",
